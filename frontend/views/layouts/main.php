@@ -392,17 +392,17 @@ AppAsset::register($this);
             $('#order-email_ship').val($('#user-email').val());
             $('#order-phone_ship').val($('#user-phone').val());
             $('#order-add_ship').val($('#user-add').val());
-            $('#provinceShip').val($('#province').val());
-            $('#dictrictShip').val($('#dictrict').val());
-            $('#wardsShip').val($('#wards').val());
+            $('#order-province_ship').val($('#province').val());
+            $('#order-dictrict_ship').val($('#dictrict').val());
+            $('#order-ward_ship').val($('#wards').val());
         }else {
             $('#order-user_ship').val('');
             $('#order-email_ship').val('');
             $('#order-phone_ship').val('');
             $('#order-add_ship').val('');
-            $('#provinceShip').val('');
-            $('#dictrictShip').val('');
-            $('#wardsShip').val('');
+            $('#order-province_ship').val('');
+            $('#order-dictrict_ship').val('');
+            $('#order-ward_ship').val('');
 
         }
     }

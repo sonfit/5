@@ -47,7 +47,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_ship', 'email_ship', 'phone_ship', 'add_ship', 'province_ship', 'dictrict_ship', 'ward_ship', 'resquest', 'total', 'payment_id', 'deliver_id', 'status', 'created_at', 'updated_at'], 'required','message' => '{attribute} không được để rỗng!'],
+            [['user_ship', 'email_ship', 'phone_ship', 'add_ship', 'province_ship', 'dictrict_ship', 'ward_ship', 'total', 'payment_id', 'deliver_id', 'status', 'created_at', 'updated_at'], 'required','message' => '{attribute} không được để rỗng!'],
             [['user_id', 'total', 'payment_id', 'deliver_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['user_ship',  'email_ship', 'phone_ship', 'add_ship', 'province_ship', 'dictrict_ship', 'ward_ship', 'resquest'], 'string', 'max' => 255],
         ];

@@ -62,10 +62,11 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         $searchModel = new OrderDetailSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
         return $this->renderAjax('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

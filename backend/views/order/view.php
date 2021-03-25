@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-view">
 
+
     <?= DetailView::widget([
         'model' => $model,
 
@@ -108,12 +109,43 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'label' => 'Tên sản phẩm',
                 ],
-                'pro_price',
-                'pro_qty',
+
+                [
+                    'attribute' => 'pro_price',
+                    'label' => 'Đơn giá',
+                    'format'=>['decimal',0]
+                ],
+                [
+                    'attribute' => 'pro_qty',
+                    'label' => 'Số lượng',
+                    'format'=>['decimal',0]
+                ],
             ],
-        ]); ?>
+        ]);
+
+        ?>
+
+        <?php $form = ActiveForm::begin([
+            'action' =>['update', 'id' => $model->order_id]
+        ]);
+        ?>
+        <div class="form-group ">
+            <?php if($model->status < 4  ){
+                echo Html::submitButton('Đơn hàng bị hủy', ['class' => 'btn btn-danger ','id'=>'status','name'=>'Order[status]','value'=>4]);
+                 if($model->status  < 3 ){
+                     echo Html::submitButton('Đã giao hàng', ['class' => 'btn btn-success ','id'=>'status','name'=>'Order[status]','value'=>3]);
+                    if($model->status <2 ){
+                        echo  Html::submitButton('Đang giao hàng', ['class' => 'btn btn-info ','id'=>'status','name'=>'Order[status]', 'value'=>2]);
+                   }
+                 }
+            }
+            ?>
+
+        </div>
 
 
     </div>
+    <?php ActiveForm::end();?>
 
 </div>
+

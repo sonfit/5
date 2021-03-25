@@ -84,12 +84,15 @@ class CartController extends Controller
         $province = new Tinhthanhpho();
         $province = ArrayHelper::map($province->getAllProvince(),'matp','name');
         $dictrict = new Quanhuyen();
-
+        $dictrict = ArrayHelper::map($dictrict->getAllDictrict(),'maqh','name');
         $ward = new Xaphuongthitran();
+        $ward = ArrayHelper::map($ward->getAllWards(),'xaid','name');
 
         if(!Yii::$app->user->isGuest){
-            $dictrict = ArrayHelper::map($dictrict->getById(Yii::$app->user->identity->province),'maqh','name');
-            $ward = ArrayHelper::map($ward->getById(Yii::$app->user->identity->dictrict), 'xaid','name');
+//            $dictrict = ArrayHelper::map($dictrict->getById(Yii::$app->user->identity->province),'maqh','name');
+
+//            $ward = ArrayHelper::map($ward->getById(Yii::$app->user->identity->dictrict), 'xaid','name');
+
             $user->username = Yii::$app->user->identity->username;
             $user->email    = Yii::$app->user->identity->email;
             $user->phone    = Yii::$app->user->identity->phone;
@@ -100,7 +103,6 @@ class CartController extends Controller
             $model->user_id                             = Yii::$app->user->id;
 
         }
-
         $payment = new Payment();
         $payment = ArrayHelper::map($payment->getAllPayment(),'pay_id','pay_name');
         $deliver = new Deliver();
@@ -116,10 +118,7 @@ class CartController extends Controller
         $model->updated_at =time();
         $model->status =1;
         if ($model->load(Yii::$app->request->post()) && $model->save() ) {
-            $dictrict = new Quanhuyen();
-            $ward = new Xaphuongthitran();
-            $dictrict = ArrayHelper::map($dictrict->getAllDictrict(),'maqh','name');
-            $ward = ArrayHelper::map($ward->getAllWards(),'xaid','name');
+
             $infoPost = Yii::$app->request->post();
             $body = '<h2 class="heading-title">Đặt hàng thành công</h2>
                         <div class="">
