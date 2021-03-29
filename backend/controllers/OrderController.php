@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -45,13 +46,29 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
+        $query = Order::find()->where(['status' => 1]);
+
+
+//        $count = array_sum($query);
+        $count = $query->count();
+        $pagination = new Pagination(['totalCount' => $count]);
+
+
+        $models = $query->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'models' => $models,
+            'pages' => $pagination,
         ]);
+
+
+
     }
 
     /**

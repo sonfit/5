@@ -1,5 +1,7 @@
 <?php
 
+use backend\models\Banner;
+
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -70,33 +72,31 @@ $this->title = 'My Yii Application';
 
                 <div id="hero">
                     <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
-                        <div class="item" style="background-image: url(assets/images/sliders/01.jpg);">
+
+                        <?php
+                            $topSlide = new Banner();
+                            $topSlide =  $topSlide->getBanner(0);
+                            foreach ($topSlide as $item){
+                        ?>
+
+
+                        <div class="item" style="background-image: url(/5/uploads/banner/<?= $item['banner_image'] ?>);">
                             <div class="container-fluid">
                                 <div class="caption bg-color vertical-center text-left">
-                                    <div class="slider-header fadeInDown-1">Top Brands</div>
-                                    <div class="big-text fadeInDown-1"> New Collections </div>
-                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
-                                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+<!--                                    <div class="slider-header fadeInDown-1">Top Brands</div>-->
+                                    <div class="big-text fadeInDown-1"> <?= $item['banner_title'] ?> </div>
+                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span><?= $item['banner_des'] ?></span> </div>
+                                    <div class="button-holder fadeInDown-3"> <a href="<?= $item['banner_button_link'] ?>" class="btn-lg btn btn-uppercase btn-primary shop-now-button"><?= $item['banner_button_text'] ?></a> </div>
                                 </div>
                                 <!-- /.caption -->
                             </div>
                             <!-- /.container-fluid -->
                         </div>
+
+                        <?php } ?>
                         <!-- /.item -->
 
-                        <div class="item" style="background-image: url(assets/images/sliders/02.jpg);">
-                            <div class="container-fluid">
-                                <div class="caption bg-color vertical-center text-left">
-                                    <div class="slider-header fadeInDown-1">Spring 2016</div>
-                                    <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span> </div>
-                                    <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
-                                </div>
-                                <!-- /.caption -->
-                            </div>
-                            <!-- /.container-fluid -->
-                        </div>
-                        <!-- /.item -->
+
 
                     </div>
                     <!-- /.owl-carousel -->
@@ -497,15 +497,21 @@ $this->title = 'My Yii Application';
                 <!-- /.section -->
                 <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
                 <!-- ============================================== WIDE PRODUCTS ============================================== -->
+
+                <?php
+                $botSlide = new Banner();
+                $botSlide =  $botSlide->getBanner(2);
+                foreach ($botSlide as $item){
+                ?>
                 <div class="wide-banners wow fadeInUp outer-bottom-xs">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="wide-banner cnt-strip">
-                                <div class="image"> <img class="img-responsive" src="assets\images\banners\home-banner.jpg" alt=""> </div>
+                                <div class="image"> <img class="img-responsive" src="uploads/banner/<?= $item['banner_image'] ?>" alt=""> </div>
                                 <div class="strip strip-text">
                                     <div class="strip-inner">
-                                        <h2 class="text-right">New Mens Fashion<br>
-                                            <span class="shopping-needs">Save up to 40% off</span></h2>
+                                        <h2 class="text-right"><?= $item['banner_title']?><br>
+                                            <span class="shopping-needs"><?= $item['banner_des']?></span></h2>
                                     </div>
                                 </div>
                                 <div class="new-label">
@@ -520,6 +526,8 @@ $this->title = 'My Yii Application';
                     </div>
                     <!-- /.row -->
                 </div>
+
+                <?php } ?>
                 <!-- /.wide-banners -->
                 <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
 

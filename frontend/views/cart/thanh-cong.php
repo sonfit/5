@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 $this->title =  'Thanh toán' ;
-if($cart) :
+if($model) :
     $docso = new \frontend\components\Cart();
 
     $payment = new Payment();

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
+use yii\widgets\LinkPager;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\Order */

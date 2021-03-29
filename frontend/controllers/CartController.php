@@ -89,10 +89,6 @@ class CartController extends Controller
         $ward = ArrayHelper::map($ward->getAllWards(),'xaid','name');
 
         if(!Yii::$app->user->isGuest){
-//            $dictrict = ArrayHelper::map($dictrict->getById(Yii::$app->user->identity->province),'maqh','name');
-
-//            $ward = ArrayHelper::map($ward->getById(Yii::$app->user->identity->dictrict), 'xaid','name');
-
             $user->username = Yii::$app->user->identity->username;
             $user->email    = Yii::$app->user->identity->email;
             $user->phone    = Yii::$app->user->identity->phone;
@@ -166,7 +162,10 @@ class CartController extends Controller
             $email = new sendMail();
             $email->sendEmail($emailSend, 'Thông tin đặt hàng', $body );
 
+            $cart=Yii::$app->session->destroy();
             return $this->render('thanh-cong',['cart'=>$cart,'model' => $model]);
+
+
         }
 
 

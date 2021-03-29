@@ -11,9 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->order_id, 'url' => ['view',
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="order-update">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
         'payment' => $payment,
@@ -22,5 +20,4 @@ $this->params['breadcrumbs'][] = 'Update';
         'dictrict' => $dictrict,
         'ward'=> $ward
     ]) ?>
-
 </div>
