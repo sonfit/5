@@ -22,7 +22,7 @@ class Categories extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public $_cats = [];
+//    public $_cats = [];
     public static function tableName()
     {
         return 'tbl_categories';
@@ -63,10 +63,11 @@ class Categories extends \yii\db\ActiveRecord
 
     public function getParent($parent=0,$string =''){
         $data = Categories::find()->where(['cate_parent'=>$parent])->all();
+        $string .= '|-- ';
         if($data){
             foreach ($data as $item){
-                if($item->cate_parent != 0){
-                    $string .= '|-- ';
+                if($item->cate_parent == 0){
+                    $string = '';
                 }
                 $this->_cats[$item->cate_id] = $string.$item->cate_name;
                 $this->getParent($item->cate_id,$string);
@@ -74,4 +75,11 @@ class Categories extends \yii\db\ActiveRecord
         }
         return $this->_cats;
     }
+
+    public function getCate(){
+        $data = Categories::find()->all();
+        return $data;
+    }
+
+
 }

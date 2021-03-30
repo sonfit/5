@@ -3,20 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Product;
-use backend\models\search\Product as ProductSearch;
-use yii\data\ActiveDataProvider;
-use yii\data\Pagination;
-use yii\filters\AccessControl;
+use backend\models\Brand;
+use backend\models\search\Brand as BrandSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * BrandController implements the CRUD actions for Brand model.
  */
-class ProductController extends Controller
+class BrandController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -24,112 +20,61 @@ class ProductController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'allow'=> true,
-                        'roles' =>['@'],
-                        'matchCallback'=>function($rule,$action){
-                            $control = Yii::$app->controller->id;
-                            $control = substr($control,0,4);
-                            $action = Yii::$app->controller->action->id;
-                            $role = $action.'-'.$control;
-                            if(Yii::$app->user->can($role)){
-                                return true;
-                            }
-                        }
-                    ]
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
-     * Lists all Product models.
+     * Lists all Brand models.
      * @return mixed
      */
-//    public function actionIndex()
-//    {
-//        $searchModel = new ProductSearch();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//        ]);
-//    }
-
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new BrandSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->pagination = ['pageSize' => 10];
-
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-
         ]);
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Brand model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Brand model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new Brand();
 
         if ($model->load(Yii::$app->request->post())  ) {
-            $model->file = UploadedFile::getInstance($model,'file');
-
-            if($model->file){
-                $model->file->saveAs('../../uploads/'.$model->file->name);
-                $model->prod_image = $model->file->name;
-            }
             $model->created_at = time();
             $model->updated_at= time();
-            if($model->save(false)){
+            if($model->save()){
+                Yii::$app->session->addFlash('success','Thêm thương hiệu thành công');
                 return $this->redirect(['index']);
             }else{
+                Yii::$app->session->addFlash('danger','Thêm thương hiệu thất bại');
                 return $this->render('create', [
                     'model' => $model,
                 ]);
@@ -141,7 +86,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Brand model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -152,27 +97,25 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())  ) {
-            $model->file = UploadedFile::getInstance($model,'file');
-            if($model->file){
-                $model->file->saveAs('../../uploads/'.$model->file->name);
-                $model->prod_image = $model->file->name;
-            }
             $model->updated_at= time();
-            if($model->save(false)){
+            if($model->save()){
+                Yii::$app->session->addFlash('success','Update thương hiệu thành công');
                 return $this->redirect(['index']);
             }else{
+                Yii::$app->session->addFlash('danger','update thương hiệu thất bại');
                 return $this->render('create', [
                     'model' => $model,
                 ]);
             }
         }
-        return $this->render('create', [
+
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Brand model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -186,15 +129,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Brand model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Brand the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Brand::findOne($id)) !== null) {
             return $model;
         }
 

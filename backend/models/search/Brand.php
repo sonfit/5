@@ -4,12 +4,12 @@ namespace backend\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Product as ProductModel;
+use backend\models\Brand as BrandModel;
 
 /**
- * Product represents the model behind the search form of `backend\models\Product`.
+ * Brand represents the model behind the search form of `backend\models\Brand`.
  */
-class Product extends ProductModel
+class Brand extends BrandModel
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class Product extends ProductModel
     public function rules()
     {
         return [
-            [['prod_id', 'cate_id','prod_price', 'prod_qty', 'prod_status', 'created_at', 'updated_at'], 'integer'],
-            [['prod_name', 'prod_slug', 'brand_id', 'prod_image', 'prod_content', 'prod_desc'], 'safe'],
+            [['brand_id', 'brand_status', 'created_at', 'updated_at'], 'integer'],
+            [['brand_name', 'brand_slug', 'brand_desc'], 'safe'],
         ];
     }
 
@@ -38,9 +38,9 @@ class Product extends ProductModel
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$cate_id='',$brand_id='')
+    public function search($params)
     {
-        $query = ProductModel::find();
+        $query = BrandModel::find();
 
         // add conditions that should always apply here
 
@@ -58,21 +58,15 @@ class Product extends ProductModel
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'prod_id' => $this->prod_id,
-            'cate_id' => $cate_id,
-            'brand_id' => $brand_id,
-            'prod_price' => $this->prod_price,
-            'prod_qty' => $this->prod_qty,
-            'prod_status' => $this->prod_status,
+            'brand_id' => $this->brand_id,
+            'brand_status' => $this->brand_status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'prod_name', $this->prod_name])
-            ->andFilterWhere(['like', 'prod_slug', $this->prod_slug])
-            ->andFilterWhere(['like', 'prod_image', $this->prod_image])
-            ->andFilterWhere(['like', 'prod_content', $this->prod_content])
-            ->andFilterWhere(['like', 'prod_desc', $this->prod_desc]);
+        $query->andFilterWhere(['like', 'brand_name', $this->brand_name])
+            ->andFilterWhere(['like', 'brand_slug', $this->brand_slug])
+            ->andFilterWhere(['like', 'brand_desc', $this->brand_desc]);
 
         return $dataProvider;
     }

@@ -4,36 +4,26 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\search\Product */
+/* @var $model backend\models\search\Brand */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="product-search">
+<div class="brand-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'prod_id') ?>
+    <?= $form->field($model, 'brand_id') ?>
 
-    <?= $form->field($model, 'cate_id') ?>
+    <?= $form->field($model, 'brand_name') ?>
 
-    <?= $form->field($model, 'prod_name') ?>
+    <?= $form->field($model, 'brand_slug') ?>
 
-    <?= $form->field($model, 'prod_slug') ?>
+    <?= $form->field($model, 'brand_desc') ?>
 
-    <?= $form->field($model, 'prod_image') ?>
-
-    <?php // echo $form->field($model, 'prod_content') ?>
-
-    <?php // echo $form->field($model, 'prod_desc') ?>
-
-    <?php // echo $form->field($model, 'prod_price') ?>
-
-    <?php // echo $form->field($model, 'prod_qty') ?>
-
-    <?php // echo $form->field($model, 'prod_status') ?>
+    <?= $form->field($model, 'brand_status') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>
 

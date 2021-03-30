@@ -366,7 +366,8 @@ if($model) :
                     <section class="section featured-product wow fadeInUp">
                         <h3 class="section-title">Sản phẩm tương tự</h3>
                         <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-                            <?php $cateP = \backend\models\Product::find()->where(['cate_id'=>$model->cate_id])->all();
+                            <?php $cateP = \backend\models\Product::find()->where(['cate_id'=>$model->cate_id])->andWhere(['not',['prod_slug'=>$model->prod_slug]])->all();
+
                             foreach ($cateP as $cate) :
                                 ?>
 

@@ -123,22 +123,19 @@ AppAsset::register($this);
                                         <li>
                                             <div class="yamm-content ">
                                                 <div class="row">
-                                                    <?php $cate = \backend\models\Categories::find()->where(['cate_parent'=>0])->all();
+                                                    <?php $cate = \backend\models\Categories::find()->all();
 
                                                     if($cate) :
                                                     foreach ($cate as $item) :
                                                     ?>
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <h2 class="title"><?php echo $item->cate_name; ?></h2>
-                                                        <?php
-                                                        $child = \backend\models\Categories::find()->where(['cate_parent'=>$item->cate_id])->all();
-                                                        if ($child) :
-                                                            foreach ($child as $i) :
-                                                                ?>
+<!--                                                        <h2 class="title">--><?php //echo $item->cate_name; ?><!--</h2>-->
                                                         <ul class="links">
-                                                            <li><a href="#"><?php echo $i->cate_name; ?></a></li>
+                                                            <li>
+                                                                <?php echo \yii\helpers\Html::a($item->cate_name,['/categories/view/','slug'=>$item->cate_slug]); ?>
+                                                            </li>
                                                         </ul>
-                                                        <?php endforeach; endif; ?>
+
                                                     </div>
                                                     <?php endforeach; endif; ?>
                                                     <!-- /.col -->

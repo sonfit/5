@@ -72,12 +72,13 @@ AppAsset::register($this);
                             <?php
                             echo Html::a('Trang chủ',['/'],['class'=>($control=='site')?'list-group-item active' : 'list-group-item']);
                             echo Html::a('Danh mục',['/categories'],['class'=>($control=='categories')?'list-group-item active' : 'list-group-item']);
+                            echo Html::a('Thương hiệu',['/brand'],['class'=>($control=='brand')?'list-group-item active' : 'list-group-item']);
                             echo Html::a('Sản phẩm',['/product'],['class'=>($control=='product')?'list-group-item active' : 'list-group-item']);
                             echo Html::a('Quản lý đơn hàng',['/order'],['class'=>($control=='order')?'list-group-item active' : 'list-group-item']);
 //                            echo Html::a('Chi tiết đơn',['/order-detail'],['class'=>($control=='order-detail')?'list-group-item active' : 'list-group-item']);
-                            echo Html::a('Quản lý file',['/file'],['class'=>($control=='file')?'list-group-item active' : 'list-group-item']);
-                            echo Html::a('Quản lý Home',['/homepages'],['class'=>($control=='homepages')?'list-group-item active' : 'list-group-item']);
-                            echo Html::a('Quản lý Slide',['/slidetop'],['class'=>($control=='slidetop')?'list-group-item active' : 'list-group-item']);
+//                            echo Html::a('Quản lý file',['/file'],['class'=>($control=='file')?'list-group-item active' : 'list-group-item']);
+//                            echo Html::a('Quản lý Home',['/homepages'],['class'=>($control=='homepages')?'list-group-item active' : 'list-group-item']);
+//                            echo Html::a('Quản lý Slide',['/slidetop'],['class'=>($control=='slidetop')?'list-group-item active' : 'list-group-item']);
                             echo Html::a('Quản lý Banner',['/banner'],['class'=>($control=='banner')?'list-group-item active' : 'list-group-item']);
                             ?>
                         </ul>

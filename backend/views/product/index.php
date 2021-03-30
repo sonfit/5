@@ -1,6 +1,9 @@
 <?php
 
 use backend\models\Categories;
+use backend\models\Brand;
+use backend\models\Product;
+use yii\data\Pagination;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\LinkPager;
@@ -45,6 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $prod_name->cate_name;
                 }
             ],
+            [
+                'attribute' => 'brand_id',
+                'content' => function($brand) {
+                    $brand_name = Brand::find()->where(['brand_id' => $brand->brand_id])->one();
+                    return $brand_name->brand_name;
+                }
+            ],
             'prod_name',
 //            'prod_status',
             [
@@ -74,14 +84,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]);
-    foreach ($models as $model) {
-        // display $model here
-    }
-
-    // display pagination
-    echo LinkPager::widget([
-        'pagination' => $pages,
     ]);
     ?>
 

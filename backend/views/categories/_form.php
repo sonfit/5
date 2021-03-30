@@ -18,14 +18,7 @@ use backend\models\Categories;
 
     <?= $form->field($model, 'cate_slug')->textInput(['maxlength' => true]) ?>
     <?php $cat = new Categories(); ?>
-    <?= $form->field($model, 'cate_parent')->dropDownList(
-           $cat->getParent(),
-        [
-                'prompt'=>'Chọn danh mục cha'
-        ]
-    )?>
     <?= $form->field($model, 'cate_desc')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'cate_status')->dropDownList(
             [
                 1=>'Hiện',

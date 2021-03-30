@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $prod_id
  * @property int $cate_id
+ * @property int $brand_id
  * @property string $prod_name
  * @property string $prod_slug
  * @property string $prod_image
@@ -38,8 +39,8 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cate_id', 'prod_name', 'prod_slug', 'prod_image', 'prod_content', 'prod_desc', 'created_at', 'updated_at'], 'required'],
-            [['cate_id', 'prod_price', 'prod_qty', 'prod_status', 'created_at', 'updated_at'], 'integer'],
+            [['cate_id', 'brand_id', 'prod_name', 'prod_slug', 'prod_image', 'prod_content', 'prod_desc', 'created_at', 'updated_at'], 'required'],
+            [['prod_price', 'prod_qty', 'prod_status', 'created_at', 'updated_at'], 'integer'],
             [['prod_content'], 'string'],
             [['prod_name', 'prod_slug', 'prod_image'], 'string', 'max' => 255],
             [['prod_name'], 'unique'],
@@ -56,6 +57,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             'prod_id' => 'Prod ID',
             'cate_id' => 'Danh mục',
+            'brand_id' => 'Thương hiệu',
             'prod_name' => 'Tên sản phẩm',
             'prod_slug' => 'Prod Slug',
             'prod_image' => 'Hình ảnh',
@@ -68,4 +70,9 @@ class Product extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+    public function getBrand(){
+        return $this->hasOne(Brand::className(),['brand_id'=>'brand_id']);
+    }
+
+
 }
